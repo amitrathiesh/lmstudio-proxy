@@ -1,51 +1,43 @@
-# 📸 LMStudio Screenshot Fixer (Proxy)
+# 📸 LMStudio Proxy (Screenshot Fix)
 
-![VSCode Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/amitrathiesh.lmstudio-proxy?color=blue&label=VSCode%20Extension)
+![VSCode Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/webzler.lmstudio-proxy?color=blue&label=VSCode%20Extension)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**The missing link between KiloCode (or Cline) and LMStudio's Vision Models.**
+**The missing link between AI Coding Assistants (KiloCode, Cline, Roo-Code) and LMStudio.**
 
-This VSCode extension automatically fixes the dreaded `"url field must be a base64 encoded image"` error when AI assistants try to send screenshots to LMStudio.
+This extension fixes the common error:
+> **`[Server Error] 'url' field must be a base64 encoded image`**
 
-It runs heavily tested **WebP → PNG** conversion in the background using a robust proxy server, ensuring your local vision models can see what's on your screen.
+If you use LMStudio with local vision models, you've likely hit this wall. AI agents often send image paths (e.g., `/tmp/screenshot.png`) or WebP files, but LMStudio requires base64-encoded strings.
+
+ This extension sits in the middle, transparently converting everything for you.
 
 ## 🚀 Key Features
 
-- **✅ Zero Config**: Installing the extension is (almost) all you need to do.
-- **🔄 Auto-Conversion**: Intercepts screenshot requests and instantly converts them to base64 PNGs.
-- **🖼️ WebP Support**: Fixes the #1 issue where LMStudio rejects WebP images sent by AI agents.
-- **⚡️ Native Performance**: Spawns a lightweight background process using your system's Node.js.
-- **🐛 Debug Mode**: View live logs of image conversion traffic right in VSCode.
+- **✅ Fixes the "Base64" Error**: Automatically converts internal file paths to data URIs.
+- **🖼️ WebP Support**: Solves the issue where LMStudio rejects WebP screenshots (default in many agents).
+- **⚡️ Zero-Config**: Runs in the background automatically.
+- **🔍 Debug Mode**: See exactly what your AI agent is sending to LMStudio.
 
 ## 📥 Installation
 
-1. Install the extension from the VSCode Marketplace (Coming Soon).
-2. Or build locally:
-   ```bash
-   git clone https://github.com/amitrathiesh/lmstudio-proxy.git
-   cd lmstudio-proxy
-   npm install
-   npm install -g @vscode/vsce
-   npx vsce package
-   # Then install the .vsix in VSCode
-   ```
+1. Open **VSCode Extensions** (Cmd+Shift+X).
+2. Search for **"LMStudio Proxy"**.
+3. Install the extension by **Webzler Solutions Inc.**
+4. That's it! It runs automatically.
 
 ## 🛠 Usage
 
-1. **Start the Proxy**: The extension starts automatically when you open VSCode.
-   - You'll see `$(radio-tower) Proxy: ON` in your status bar.
+1. **Verify it's Running**:
+   - Look for `$(radio-tower) Proxy: ON` in your VSCode Status Bar (bottom right).
 
-2. **Configure Your AI Assistant (e.g., KiloCode)**:
-   - Change your LLM Provider URL to point to the proxy:
-   - **Original**: `http://localhost:1234` (Direct to LMStudio)
-   - **Proxy**: `http://localhost:1235` (Through this extension)
+2. **Configure Your AI Assistant**:
+   - Point your AI tool (KiloCode, Cline, Roo-Code, etc.) to the proxy port.
+   - **Proxy URL**: `http://localhost:1235`
+   - *(Original LMStudio is at `:1234`, Proxy is at `:1235`)*
 
-3. **That's it!** 
-   - Take screenshots as normal.
-   - The proxy intercepts the request.
-   - Converts the image.
-   - Forwards it to LMStudio.
-   - Returns the response.
+3. **Enjoy**:
+   - Take screenshots in your AI chat. They will now work perfectly with your local vision model.
 
 ## ⚙️ Configuration
 

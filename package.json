@@ -2,7 +2,7 @@
     "name": "lmstudio-proxy",
     "displayName": "LMStudio Proxy (Screenshot Fix)",
     "description": "Automatically converts image paths to base64 for LMStudio vision compatibility. The missing link for KiloCode & Cline.",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "icon.png",
     "publisher": "webzler",
     "engines": {
