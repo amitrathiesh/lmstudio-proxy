@@ -37,3 +37,4 @@ coverage/
 # Build outputs
 dist/
 build/
+PUBLISHING_GUIDE.md

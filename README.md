@@ -80,7 +80,7 @@ graph LR
 
 ## 👤 Author
 
-**Amit Rathiesh**
+**Amit Rathiesh** (Webzler Solutions Inc.)
 - Email: amitrathiesh@webzler.com
 - Website: [www.webzler.com](https://www.webzler.com)
 - GitHub: [@amitrathiesh](https://github.com/amitrathiesh)

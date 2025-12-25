@@ -51,6 +51,11 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Automatically start the proxy server when VSCode launches."
+                },
+                "lmstudioProxy.debug": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable verbose logging for the proxy server."
                 }
             }
         }
