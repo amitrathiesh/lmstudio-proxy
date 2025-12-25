@@ -7,7 +7,7 @@ class ProxyManager {
         this.childProcess = null;
     }
 
-    start(port, targetUrl) {
+    start(port, targetUrl, debug) {
         return new Promise((resolve, reject) => {
             if (this.childProcess) {
                 this.outputChannel.appendLine('Proxy is already running.');
@@ -15,9 +15,9 @@ class ProxyManager {
                 return;
             }
 
-            const proxyScriptPath = path.join(__dirname, 'proxy.js');
+            const proxyScriptPath = path.join(__dirname, 'proxy.mjs');
 
-            this.outputChannel.appendLine(`Starting proxy on port ${port} -> ${targetUrl}`);
+            this.outputChannel.appendLine(`Starting proxy on port ${port} -> ${targetUrl} (Debug: ${debug})`);
 
             // Spawn the proxy as a child process using the system's Node.js
             // formatting environment variables for the child process
@@ -25,7 +25,7 @@ class ProxyManager {
                 ...process.env,
                 PROXY_PORT: port.toString(),
                 LMSTUDIO_URL: targetUrl,
-                DEBUG: 'true' // Always enable debug for extension logs
+                DEBUG: debug.toString()
             };
 
             this.childProcess = cp.spawn('node', [proxyScriptPath], {

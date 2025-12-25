@@ -28,8 +28,9 @@ function activate(context) {
         const config = vscode.workspace.getConfiguration('lmstudioProxy');
         const port = config.get('port') || 1235;
         const targetUrl = config.get('targetUrl') || 'http://localhost:1234';
+        const debug = config.get('debug') || false;
 
-        proxyManager.start(port, targetUrl)
+        proxyManager.start(port, targetUrl, debug)
             .then(() => {
                 vscode.window.showInformationMessage(`LMStudio Proxy started on port ${port}`);
                 updateStatusBar(true);

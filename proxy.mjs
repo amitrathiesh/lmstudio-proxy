@@ -15,6 +15,11 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 import { readFile } from 'fs/promises';
 import { extname, isAbsolute } from 'path';
 import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
+const __dirname = dirname(fileURLToPath(import.meta.url));
 import sharp from 'sharp';
 
 // Configuration
@@ -200,6 +205,19 @@ app.use('/', createProxyMiddleware({
     target: LMSTUDIO_URL,
     changeOrigin: true,
     onProxyReq: (proxyReq, req, res) => {
+        // DEBUG: Log the structure to see what KiloCode is sending
+        if (DEBUG && req.body) {
+            console.log(`[PROXY] 📨 Received ${req.method} request to ${req.url}`);
+            if (req.body.messages) {
+                console.log(`[PROXY] 📦 Messages count: ${req.body.messages.length}`);
+                const lastMsg = req.body.messages[req.body.messages.length - 1];
+                const contentTypes = lastMsg.content && Array.isArray(lastMsg.content)
+                    ? lastMsg.content.map(c => c.type).join(', ')
+                    : 'not-array-or-undefined';
+                console.log(`[PROXY] 🔍 Last message content types: ${contentTypes}`);
+            }
+        }
+
         // Rewrite the body if it was modified
         if (req.body) {
             const bodyData = JSON.stringify(req.body);
